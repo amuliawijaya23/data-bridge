@@ -1,7 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import themeReducer from '@redux/reducers/themeSlice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: { theme: themeReducer },
   devTools: true,
 });
 
