@@ -3,6 +3,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
 import { Roboto } from 'next/font/google';
+import { NextAppDirEmotionCacheProvider } from './EmotionCache';
 
 import { useAppSelector } from '@redux/hooks';
 import { selectTheme } from '@redux/reducers/themeSlice';
@@ -74,10 +75,12 @@ const ThemeRegistry = ({ children }: { children: React.ReactNode }) => {
   const themeMode = useAppSelector(selectTheme);
 
   return (
-    <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
+      <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </NextAppDirEmotionCacheProvider>
   );
 };
 
