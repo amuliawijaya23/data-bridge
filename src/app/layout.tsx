@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ReduxProvider } from '@redux/provider';
-import { SessionProvider } from 'next-auth/react';
+import { AuthProvider } from './AuthProvider';
 import ThemeRegistry from '@theme/ThemeRegistry';
 
 export const metadata: Metadata = {
@@ -16,11 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
+        <AuthProvider>
           <ReduxProvider>
             <ThemeRegistry>{children}</ThemeRegistry>
           </ReduxProvider>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );
