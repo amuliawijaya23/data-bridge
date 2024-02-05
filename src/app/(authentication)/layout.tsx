@@ -17,7 +17,7 @@ export default function AuthLayout({
       <Typography variant="body2" align="center" sx={{ mt: 5 }}>
         {'Copyright © '}
         <Link color="inherit" href="#">
-          SparkFlow
+          DataBridge
         </Link>
         {` ${new Date().getFullYear()}`}
         {'.'}
