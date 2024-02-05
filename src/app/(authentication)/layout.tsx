@@ -50,7 +50,17 @@ export default function AuthLayout({
             textAlign: 'center',
           }}>
           <Avatar src="" alt="logo" sx={{ width: 100, height: 100, mb: 1 }} />
-          {children}
+          <Box
+            component="form"
+            noValidate
+            sx={{
+              mt: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              width: { xs: '100%', md: '80%', xl: '50%' },
+            }}>
+            {children}
+          </Box>
           <Copyright />
         </Box>
       </Grid>

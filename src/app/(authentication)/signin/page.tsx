@@ -33,15 +33,7 @@ export default function SignIn() {
   };
 
   return (
-    <Box
-      component="form"
-      noValidate
-      sx={{
-        mt: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        width: { xs: '100%', md: '80%', xl: '50%' },
-      }}>
+    <>
       <Typography component="h1" variant="h4" sx={{ mb: 1 }}>
         Sign In
       </Typography>
@@ -108,6 +100,6 @@ export default function SignIn() {
           <b>Sign Up</b>
         </Link>
       </Typography>
-    </Box>
+    </>
   );
 }
