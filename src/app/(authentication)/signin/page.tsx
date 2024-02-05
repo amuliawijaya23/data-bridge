@@ -5,7 +5,6 @@ import {
   Button,
   Alert,
   Typography,
-  Link,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -30,19 +29,6 @@ export default function SignIn() {
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault();
-  };
-
-  const Copyright = () => {
-    return (
-      <Typography variant="body2" align="center" sx={{ mt: 5 }}>
-        {'Copyright © '}
-        <Link color="inherit" href="#">
-          SparkFlow
-        </Link>
-        {` ${new Date().getFullYear()}`}
-        {'.'}
-      </Typography>
-    );
   };
 
   return (
@@ -110,7 +96,6 @@ export default function SignIn() {
         sx={{ mt: 2, mb: 1 }}>
         Sign In
       </Button>
-      <Copyright />
     </Box>
   );
 }

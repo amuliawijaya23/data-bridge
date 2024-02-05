@@ -4,6 +4,7 @@ import {
   Box,
   Typography,
   Avatar,
+  Link,
 } from '@mui/material';
 
 export default function AuthLayout({
@@ -11,6 +12,19 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const Copyright = () => {
+    return (
+      <Typography variant="body2" align="center" sx={{ mt: 5 }}>
+        {'Copyright © '}
+        <Link color="inherit" href="#">
+          SparkFlow
+        </Link>
+        {` ${new Date().getFullYear()}`}
+        {'.'}
+      </Typography>
+    );
+  };
+
   return (
     <Grid container component={Paper} sx={{ height: '100vh' }}>
       <Grid
@@ -37,6 +51,7 @@ export default function AuthLayout({
           }}>
           <Avatar src="" alt="logo" sx={{ width: 100, height: 100, mb: 1 }} />
           {children}
+          <Copyright />
         </Box>
       </Grid>
     </Grid>
