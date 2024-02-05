@@ -11,6 +11,7 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  Link,
 } from '@mui/material';
 
 import Visibility from '@mui/icons-material/Visibility';
@@ -87,6 +88,11 @@ export default function SignIn() {
           }
         />
       </FormControl>
+      <Typography variant="subtitle1" align="left" sx={{ mt: 1 }}>
+        <Link color="inherit" href="/forgot-password">
+          <b>Forgot Password?</b>
+        </Link>
+      </Typography>
       <Button
         type="submit"
         color="primary"
@@ -96,6 +102,12 @@ export default function SignIn() {
         sx={{ mt: 2, mb: 1 }}>
         Sign In
       </Button>
+      <Typography variant="subtitle1" align="center">
+        {'Not a member? '}
+        <Link color="inherit" href="/signup">
+          <b>Sign Up</b>
+        </Link>
+      </Typography>
     </Box>
   );
 }
