@@ -35,10 +35,7 @@ export default function AuthLayout({
             alignItems: 'center',
             textAlign: 'center',
           }}>
-          <Avatar src="" alt="logo" sx={{ width: 100, height: 100, mb: 2 }} />
-          <Typography component="h1" variant="h4">
-            SparkFlow
-          </Typography>
+          <Avatar src="" alt="logo" sx={{ width: 100, height: 100, mb: 1 }} />
           {children}
         </Box>
       </Grid>
