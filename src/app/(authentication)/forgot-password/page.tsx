@@ -1,5 +1,5 @@
 'use client';
-import useAuthData from '../hooks/useAuthData';
+import useAuthData from '../hooks';
 import {
   Typography,
   Alert,

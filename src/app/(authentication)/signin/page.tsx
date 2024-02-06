@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import useAuthData from '../hooks/useAuthData';
+import useAuthData from '../hooks';
 import {
   Button,
   Alert,
