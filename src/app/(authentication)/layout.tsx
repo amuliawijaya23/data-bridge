@@ -27,18 +27,7 @@ export default function AuthLayout({
 
   return (
     <Grid container component={Paper} sx={{ height: '100vh' }}>
-      <Grid
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: 'url("/background.jpg")',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: 'white',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+      <Grid xs={false} sm={4} md={7} />
       <Grid xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
