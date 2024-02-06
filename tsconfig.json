@@ -22,8 +22,7 @@
       "@app/*": ["./src/app/*"],
       "@redux/*": ["./src/redux/*"],
       "@lib/*": ["./src/lib/*"],
-      "@theme/*": ["./src/theme/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@theme/*": ["./src/theme/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

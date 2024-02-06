@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import useAuthData from '../hooks/useAuthData';
 import {
   Button,
   FormControl,
@@ -17,11 +18,17 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function SignUp() {
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailValidity, setEmailValidity] = useState(false);
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const {
+    email,
+    emailValidity,
+    password,
+    confirmPassword,
+    error,
+    handleOnChangeEmail,
+    handleOnChangePassword,
+    handleOnChangeConfirmPassword,
+  } = useAuthData();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -49,7 +56,7 @@ export default function SignUp() {
         <OutlinedInput
           id="outlined-email"
           type="email"
-          // onChange={setEmail}
+          onChange={handleOnChangeEmail}
           value={email}
           label="Email"
           error={!emailValidity && email.length > 0}
@@ -63,7 +70,7 @@ export default function SignUp() {
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
-          // onChange={setPassword}
+          onChange={handleOnChangePassword}
           value={password}
           label="Password"
           endAdornment={
@@ -86,7 +93,7 @@ export default function SignUp() {
         <OutlinedInput
           id="outlined-adornment-confirm-password"
           type={showPassword ? 'text' : 'password'}
-          // onChange={setPassword}
+          onChange={handleOnChangeConfirmPassword}
           value={confirmPassword}
           label="Confirm Password"
           endAdornment={

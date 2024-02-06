@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
+import useAuthData from '../hooks/useAuthData';
 import {
-  Box,
   Button,
   Alert,
   Typography,
@@ -18,10 +18,15 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function SignIn() {
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailValidity, setEmailValidity] = useState(false);
-  const [password, setPassword] = useState('');
+  const {
+    email,
+    emailValidity,
+    password,
+    error,
+    handleOnChangeEmail,
+    handleOnChangePassword,
+  } = useAuthData();
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -50,7 +55,7 @@ export default function SignIn() {
         <OutlinedInput
           id="outlined-email"
           type="email"
-          // onChange={setEmail}
+          onChange={handleOnChangeEmail}
           value={email}
           label="Email"
           error={!emailValidity && email.length > 0}
@@ -64,7 +69,7 @@ export default function SignIn() {
         <OutlinedInput
           id="outlined-adornment-password"
           type={showPassword ? 'text' : 'password'}
-          // onChange={setPassword}
+          onChange={handleOnChangePassword}
           value={password}
           label="Password"
           endAdornment={

@@ -1,4 +1,5 @@
 'use client';
+import useAuthData from '../hooks/useAuthData';
 import {
   Typography,
   Alert,
@@ -7,14 +8,11 @@ import {
   OutlinedInput,
   FormHelperText,
   Button,
+  Link,
 } from '@mui/material';
 
-import { useState } from 'react';
-
 export default function ForgotPassword() {
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailValidity, setEmailValidity] = useState(false);
+  const { email, emailValidity, error, handleOnChangeEmail } = useAuthData();
 
   return (
     <>
@@ -34,7 +32,7 @@ export default function ForgotPassword() {
         <OutlinedInput
           id="outlined-email"
           type="email"
-          // onChange={setEmail}
+          onChange={handleOnChangeEmail}
           value={email}
           label="Email"
           error={!emailValidity && email.length > 0}
@@ -51,6 +49,12 @@ export default function ForgotPassword() {
         sx={{ mt: 2, mb: 1 }}>
         Submit
       </Button>
+      <Typography variant="subtitle1" align="center">
+        {'Already have an Account? '}
+        <Link color="inherit" href="/signin">
+          <b>Sign In</b>
+        </Link>
+      </Typography>
     </>
   );
 }
