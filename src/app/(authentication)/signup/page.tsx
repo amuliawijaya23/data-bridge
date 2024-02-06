@@ -27,6 +27,7 @@ export default function SignUp() {
     handleOnChangeEmail,
     handleOnChangePassword,
     handleOnChangeConfirmPassword,
+    handleSignUp,
   } = useAuthData();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -113,7 +114,7 @@ export default function SignUp() {
         color="primary"
         fullWidth
         variant="contained"
-        // onClick={submitForm}
+        onClick={handleSignUp}
         sx={{ mt: 2, mb: 1 }}>
         Sign Up
       </Button>
