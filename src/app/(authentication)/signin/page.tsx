@@ -46,7 +46,7 @@ export default function SignIn() {
         <Alert
           severity="error"
           variant="filled"
-          sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
+          sx={{ mt: 2, mb: 1, display: 'flex', alignItems: 'center' }}>
           {error}
         </Alert>
       )}
