@@ -1,12 +1,8 @@
-import {
-  AppBar,
-  Box,
-  Paper,
-  Toolbar,
-  Typography,
-  Button,
-  Container,
-} from '@mui/material';
+'use client';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+
+import { AppBar, Box, Paper, Toolbar, Typography, Button } from '@mui/material';
 
 export default function Home() {
   return (

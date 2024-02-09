@@ -3,6 +3,7 @@ import isEmail from 'validator/lib/isEmail';
 
 import { auth } from '@lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signIn } from 'next-auth/react';
 
 import { useRouter } from 'next/navigation';
 
@@ -34,6 +35,35 @@ const useAuthData = () => {
     setConfirmPassword(e.target.value);
   };
 
+  const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setError('');
+    e.preventDefault();
+
+    if (!email || !password) {
+      setError('All fields are required.');
+      return;
+    }
+
+    if (!emailValidity) {
+      setError('Please use a valid email address.');
+      return;
+    }
+
+    let success = true;
+
+    try {
+      await signIn('credentials', {
+        email,
+        password,
+        redirect: true,
+        callbackUrl: '/',
+      });
+    } catch (err) {
+      success = false;
+      throw new Error(`An error occured while signing in: ${err}`);
+    }
+  };
+
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     setError('');
     e.preventDefault();
@@ -56,13 +86,7 @@ const useAuthData = () => {
     let success = true;
 
     try {
-      const newUser = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-
-      console.log('New User Created: ', newUser);
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       success = false;
       throw new Error(`An error occured during registration: ${err}`);
@@ -83,6 +107,7 @@ const useAuthData = () => {
     handleOnChangePassword,
     handleOnChangeConfirmPassword,
     handleSignUp,
+    handleSignIn,
   };
 };
 

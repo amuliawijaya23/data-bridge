@@ -25,6 +25,7 @@ export default function SignIn() {
     error,
     handleOnChangeEmail,
     handleOnChangePassword,
+    handleSignIn,
   } = useAuthData();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -95,7 +96,7 @@ export default function SignIn() {
         color="primary"
         fullWidth
         variant="contained"
-        // onClick={signIn}
+        onClick={handleSignIn}
         sx={{ mt: 2, mb: 1 }}>
         Sign In
       </Button>
