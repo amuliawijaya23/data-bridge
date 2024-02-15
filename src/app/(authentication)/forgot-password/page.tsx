@@ -1,5 +1,5 @@
 'use client';
-import useAuthData from '../hooks';
+import useAuthData from '@hooks/useAuthenticationData';
 import {
   Typography,
   Alert,
@@ -10,6 +10,8 @@ import {
   Button,
   Link,
 } from '@mui/material';
+
+import EmailInput from '@components/Authentication/EmailInput';
 
 export default function ForgotPassword() {
   const { email, emailValidity, error, handleOnChangeEmail } = useAuthData();
@@ -27,20 +29,11 @@ export default function ForgotPassword() {
           {error}
         </Alert>
       )}
-      <FormControl size="small" variant="outlined" sx={{ mt: 1 }}>
-        <InputLabel htmlFor="outlined-email">Email</InputLabel>
-        <OutlinedInput
-          id="outlined-email"
-          type="email"
-          onChange={handleOnChangeEmail}
-          value={email}
-          label="Email"
-          error={!emailValidity && email.length > 0}
-        />
-        {!emailValidity && email.length > 0 && (
-          <FormHelperText>Please use a valid email address.</FormHelperText>
-        )}
-      </FormControl>
+      <EmailInput
+        input={email}
+        isEmailValid={emailValidity}
+        onChangeHandler={handleOnChangeEmail}
+      />
       <Button
         color="primary"
         fullWidth
