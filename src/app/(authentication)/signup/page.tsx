@@ -1,21 +1,9 @@
 'use client';
-import { useState } from 'react';
-import useAuthData from '../hooks';
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  FormHelperText,
-  Typography,
-  Alert,
-  Link,
-} from '@mui/material';
+import useAuthData from '@hooks/useAuthenticationData';
+import { Button, Typography, Alert, Link } from '@mui/material';
 
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import EmailInput from '@components/Authentication/EmailInput';
+import PasswordInput from '@components/Authentication/PasswordInput';
 
 export default function SignUp() {
   const {
@@ -30,15 +18,6 @@ export default function SignUp() {
     handleSignUp,
   } = useAuthData();
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    event.preventDefault();
-  };
   return (
     <>
       <Typography component="h1" variant="h4" sx={{ mb: 1 }}>
@@ -52,64 +31,19 @@ export default function SignUp() {
           {error}
         </Alert>
       )}
-      <FormControl size="small" variant="outlined" sx={{ mt: 1 }}>
-        <InputLabel htmlFor="outlined-email">Email</InputLabel>
-        <OutlinedInput
-          id="outlined-email"
-          type="email"
-          onChange={handleOnChangeEmail}
-          value={email}
-          label="Email"
-          error={!emailValidity && email.length > 0}
-        />
-        {!emailValidity && email.length > 0 && (
-          <FormHelperText>Please use a valid email address.</FormHelperText>
-        )}
-      </FormControl>
-      <FormControl sx={{ mt: 1 }} size="small" variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          onChange={handleOnChangePassword}
-          value={password}
-          label="Password"
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end">
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-      <FormControl sx={{ mt: 1 }} size="small" variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">
-          Confirm Password
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-confirm-password"
-          type={showPassword ? 'text' : 'password'}
-          onChange={handleOnChangeConfirmPassword}
-          value={confirmPassword}
-          label="Confirm Password"
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end">
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl>
+      <EmailInput
+        input={email}
+        isEmailValid={emailValidity}
+        onChangeHandler={handleOnChangeEmail}
+      />
+      <PasswordInput
+        input={password}
+        onChangeHandler={handleOnChangePassword}
+      />
+      <PasswordInput
+        input={confirmPassword}
+        onChangeHandler={handleOnChangeConfirmPassword}
+      />
       <Button
         color="primary"
         fullWidth
