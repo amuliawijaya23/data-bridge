@@ -28,6 +28,12 @@ describe('PasswordInput', () => {
     expect(getByLabelText('Password')).toHaveAttribute('type', 'password');
   });
 
+  it('displays visibility icon when input type is set to password', () => {
+    const { getByTestId } = render(<PasswordInput {...InputProps} />);
+
+    expect(getByTestId('show-password-icon-on')).toBeInTheDocument();
+  });
+
   it('displays input as text when show password button is triggered', () => {
     const { getByTestId, getByLabelText } = render(
       <PasswordInput {...InputProps} />,
@@ -35,5 +41,13 @@ describe('PasswordInput', () => {
     fireEvent.click(getByTestId('show-password-button'));
 
     expect(getByLabelText('Password')).toHaveAttribute('type', 'text');
+  });
+
+  it('displays visibility off icon when input type is set to text', () => {
+    const { getByTestId } = render(<PasswordInput {...InputProps} />);
+
+    fireEvent.click(getByTestId('show-password-button'));
+
+    expect(getByTestId('show-password-icon-off')).toBeInTheDocument();
   });
 });
