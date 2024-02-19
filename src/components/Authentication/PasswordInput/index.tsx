@@ -42,6 +42,7 @@ const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
         endAdornment={
           <InputAdornment position="end">
             <IconButton
+              data-testid="show-password-button"
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
