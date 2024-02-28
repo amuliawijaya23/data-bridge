@@ -34,7 +34,6 @@ const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
     <FormControl sx={{ mt: 1 }} size="small" variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
         type={showPassword ? 'text' : 'password'}
         onChange={onChangeHandler}
         value={input}
