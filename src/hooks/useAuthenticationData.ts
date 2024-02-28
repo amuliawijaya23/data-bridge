@@ -103,9 +103,17 @@ const useAuthData = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
+    } catch (err: any) {
       success = false;
-      throw new Error(`An error occured during registration: ${err}`);
+
+      switch (err.code) {
+        case 'auth/weak-password':
+          setError('Password should at least be 6 characters.');
+          break;
+        case 'auth/email-already-in-use':
+          setError('Email already in use.');
+          break;
+      }
     }
 
     if (success) {
