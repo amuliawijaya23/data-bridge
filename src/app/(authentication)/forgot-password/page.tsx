@@ -5,7 +5,8 @@ import { Typography, Alert, Button, Link } from '@mui/material';
 import EmailInput from '@components/Authentication/EmailInput';
 
 export default function ForgotPassword() {
-  const { email, emailValidity, error, handleOnChangeEmail } = useAuthData();
+  const { email, emailValidity, error, handleOnChangeEmail, handleResetEmail } =
+    useAuthData();
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function ForgotPassword() {
         color="primary"
         fullWidth
         variant="contained"
-        // onClick={submitForm}
+        onClick={handleResetEmail}
         sx={{ mt: 2, mb: 1 }}>
         Submit
       </Button>

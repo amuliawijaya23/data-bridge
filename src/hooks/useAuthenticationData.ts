@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 
 import { auth } from '@lib/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 import { signIn } from 'next-auth/react';
 
 import { useRouter } from 'next/navigation';
@@ -15,6 +18,14 @@ const useAuthData = () => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+
+  const resetForm = () => {
+    setEmail('');
+    setEmailValidity(false);
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+  };
 
   const handleOnChangeEmail = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -121,6 +132,31 @@ const useAuthData = () => {
     }
   };
 
+  const handleResetEmail = async () => {
+    if (!email) {
+      setError('Enter an email address.');
+    }
+
+    if (!emailValidity) {
+      setError('Please use a valid email address.');
+      return;
+    }
+    let success = true;
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (err) {
+      success = false;
+      throw new Error(
+        `An error occured when requesting password reset. ${err}`,
+      );
+    }
+
+    if (success) {
+      resetForm();
+    }
+  };
+
   return {
     email,
     emailValidity,
@@ -132,6 +168,7 @@ const useAuthData = () => {
     handleOnChangeConfirmPassword,
     handleSignUp,
     handleSignIn,
+    handleResetEmail,
   };
 };
 
