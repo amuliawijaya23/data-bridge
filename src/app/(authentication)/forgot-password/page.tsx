@@ -1,15 +1,6 @@
 'use client';
 import useAuthData from '@hooks/useAuthenticationData';
-import {
-  Typography,
-  Alert,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  FormHelperText,
-  Button,
-  Link,
-} from '@mui/material';
+import { Typography, Alert, Button, Link } from '@mui/material';
 
 import EmailInput from '@components/Authentication/EmailInput';
 
