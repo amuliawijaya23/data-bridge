@@ -49,6 +49,7 @@ export default function SignIn() {
         fullWidth
         variant="contained"
         onClick={handleSignIn}
+        data-testid="sign-in-button"
         sx={{ mt: 2, mb: 1 }}>
         Sign In
       </Button>

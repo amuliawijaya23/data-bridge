@@ -28,7 +28,7 @@ const EmailInput = ({ input, isEmailValid, onChangeHandler }: InputProps) => {
         error={!isEmailValid && input.length > 0}
       />
       {!isEmailValid && input.length > 0 && (
-        <FormHelperText>Please use a valid email address.</FormHelperText>
+        <FormHelperText>Invalid email address</FormHelperText>
       )}
     </FormControl>
   );

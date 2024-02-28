@@ -52,14 +52,30 @@ const useAuthData = () => {
     let success = true;
 
     try {
-      await signIn('credentials', {
+      const res = await signIn('credentials', {
         email,
         password,
-        redirect: true,
-        callbackUrl: '/',
+        redirect: false,
       });
+
+      if (res?.status == 200) {
+        router.push('/');
+      } else if (res?.error) {
+        success = false;
+
+        switch (res.error) {
+          case 'auth/invalid-credential':
+            setError('Invalid email or password.');
+            break;
+          case 'auth/internal-error':
+            setError('Internal server error while signing in.');
+            break;
+          case 'auth/too-many-requests':
+            setError('Too many requests.');
+            break;
+        }
+      }
     } catch (err) {
-      success = false;
       throw new Error(`An error occured while signing in: ${err}`);
     }
   };
