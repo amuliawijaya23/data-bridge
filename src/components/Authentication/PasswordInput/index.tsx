@@ -14,12 +14,13 @@ import React from 'react';
 
 interface InputProps {
   input: string;
+  testId: string;
   onChangeHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
 
-const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
+const PasswordInput = ({ input, testId, onChangeHandler }: InputProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -37,6 +38,7 @@ const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
         type={showPassword ? 'text' : 'password'}
         onChange={onChangeHandler}
         value={input}
+        data-testid={testId}
         label="Password"
         endAdornment={
           <InputAdornment position="end">

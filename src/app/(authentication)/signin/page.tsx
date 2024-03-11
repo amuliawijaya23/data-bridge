@@ -32,10 +32,12 @@ export default function SignIn() {
       <EmailInput
         input={email}
         isEmailValid={emailValidity}
+        testId="email-input"
         onChangeHandler={handleOnChangeEmail}
       />
       <PasswordInput
         input={password}
+        testId="password-input"
         onChangeHandler={handleOnChangePassword}
       />
       <Typography variant="subtitle1" align="left" sx={{ mt: 1 }}>

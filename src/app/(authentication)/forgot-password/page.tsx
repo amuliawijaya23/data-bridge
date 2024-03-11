@@ -31,6 +31,7 @@ export default function ForgotPassword() {
       <EmailInput
         input={email}
         isEmailValid={emailValidity}
+        testId="email-input"
         onChangeHandler={handleOnChangeEmail}
       />
       <Button
