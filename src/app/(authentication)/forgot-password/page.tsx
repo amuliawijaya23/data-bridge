@@ -13,6 +13,13 @@ export default function ForgotPassword() {
       <Typography component="h1" variant="h4" sx={{ mb: 1 }}>
         Forgot Password
       </Typography>
+      <Typography
+        component="span"
+        variant="body1"
+        sx={{ mb: 1, textAlign: 'start' }}>
+        If an account with your email exist, a password reset instruction will
+        be sent to your email.
+      </Typography>
       {error && (
         <Alert
           severity="error"

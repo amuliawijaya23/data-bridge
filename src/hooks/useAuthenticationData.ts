@@ -154,6 +154,7 @@ const useAuthData = () => {
 
     if (success) {
       resetForm();
+      router.push('/signin');
     }
   };
 
