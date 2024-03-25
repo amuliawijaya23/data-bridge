@@ -18,10 +18,10 @@ describe('EmailInput', () => {
     render(<EmailInput {...InputProps} />);
   });
 
-  it('it renders "Please use a valid email address." helper text when entered an invalid email address', () => {
+  it('it renders "Invalid email address" helper text when entered an invalid email address', () => {
     InputProps = { ...InputProps, input: 'testing', isEmailValid: false };
     const { getByText } = render(<EmailInput {...InputProps} />);
 
-    expect(getByText('Please use a valid email address.')).toBeInTheDocument();
+    expect(getByText('Invalid email address')).toBeInTheDocument();
   });
 });

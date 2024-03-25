@@ -34,20 +34,24 @@ export default function SignUp() {
       <EmailInput
         input={email}
         isEmailValid={emailValidity}
+        testId="email-input"
         onChangeHandler={handleOnChangeEmail}
       />
       <PasswordInput
         input={password}
+        testId="password-input"
         onChangeHandler={handleOnChangePassword}
       />
       <PasswordInput
         input={confirmPassword}
+        testId="confirm-password-input"
         onChangeHandler={handleOnChangeConfirmPassword}
       />
       <Button
         color="primary"
         fullWidth
         variant="contained"
+        data-testid="sign-up-button"
         onClick={handleSignUp}
         sx={{ mt: 2, mb: 1 }}>
         Sign Up

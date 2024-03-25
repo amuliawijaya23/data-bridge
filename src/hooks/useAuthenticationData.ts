@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 
 import { auth } from '@lib/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 import { signIn } from 'next-auth/react';
 
 import { useRouter } from 'next/navigation';
@@ -15,6 +18,14 @@ const useAuthData = () => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+
+  const resetForm = () => {
+    setEmail('');
+    setEmailValidity(false);
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+  };
 
   const handleOnChangeEmail = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -52,14 +63,30 @@ const useAuthData = () => {
     let success = true;
 
     try {
-      await signIn('credentials', {
+      const res = await signIn('credentials', {
         email,
         password,
-        redirect: true,
-        callbackUrl: '/',
+        redirect: false,
       });
+
+      if (res?.status == 200) {
+        router.push('/');
+      } else if (res?.error) {
+        success = false;
+
+        switch (res.error) {
+          case 'auth/invalid-credential':
+            setError('Invalid email or password.');
+            break;
+          case 'auth/internal-error':
+            setError('Internal server error while signing in.');
+            break;
+          case 'auth/too-many-requests':
+            setError('Too many requests.');
+            break;
+        }
+      }
     } catch (err) {
-      success = false;
       throw new Error(`An error occured while signing in: ${err}`);
     }
   };
@@ -87,12 +114,46 @@ const useAuthData = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-    } catch (err) {
+    } catch (err: any) {
       success = false;
-      throw new Error(`An error occured during registration: ${err}`);
+
+      switch (err.code) {
+        case 'auth/weak-password':
+          setError('Password should at least be 6 characters.');
+          break;
+        case 'auth/email-already-in-use':
+          setError('Email already in use.');
+          break;
+      }
     }
 
     if (success) {
+      router.push('/signin');
+    }
+  };
+
+  const handleResetEmail = async () => {
+    if (!email) {
+      setError('Enter an email address.');
+    }
+
+    if (!emailValidity) {
+      setError('Please use a valid email address.');
+      return;
+    }
+    let success = true;
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (err) {
+      success = false;
+      throw new Error(
+        `An error occured when requesting password reset. ${err}`,
+      );
+    }
+
+    if (success) {
+      resetForm();
       router.push('/signin');
     }
   };
@@ -108,6 +169,7 @@ const useAuthData = () => {
     handleOnChangeConfirmPassword,
     handleSignUp,
     handleSignIn,
+    handleResetEmail,
   };
 };
 

@@ -27,8 +27,8 @@ export const authOptions = {
             return userCredential.user;
           }
           return null;
-        } catch (error) {
-          throw new Error(`An error occured while signing in: ${error}`);
+        } catch (error: any) {
+          throw new Error(error.code);
         }
       },
     }),

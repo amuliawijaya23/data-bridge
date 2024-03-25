@@ -14,12 +14,13 @@ import React from 'react';
 
 interface InputProps {
   input: string;
+  testId: string;
   onChangeHandler: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
 }
 
-const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
+const PasswordInput = ({ input, testId, onChangeHandler }: InputProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -34,10 +35,10 @@ const PasswordInput = ({ input, onChangeHandler }: InputProps) => {
     <FormControl sx={{ mt: 1 }} size="small" variant="outlined">
       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
         type={showPassword ? 'text' : 'password'}
         onChange={onChangeHandler}
         value={input}
+        data-testid={testId}
         label="Password"
         endAdornment={
           <InputAdornment position="end">
